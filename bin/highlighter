@@ -36,7 +36,7 @@ EOH
 #######################################
 function __highlighter_main__()
 {
-    local -r opts=$(getopt -o b:f:hs: -l background:,foreground:,help,style: -- "$@") || exit
+    local -r opts=$(getopt -o :b:f:hs: -l background:,foreground:,help,style: -- "$@") || exit
     local -A colors=([Black]=30 [Red]=31 [Green]=32 [Yellow]=33 [Blue]=34 [Purple]=35 [Cyan]=36 [White]=37)
     local -A styles=([Normal]=0 [Bold]=1 [Faint]=2 [Italics]=3 [Underline]=4)
     local highlighter
@@ -63,6 +63,11 @@ function __highlighter_main__()
                 ;;
             --)
                 shift
+                break
+                ;;
+            -*)
+                ;;
+            *)
                 break
                 ;;
         esac
