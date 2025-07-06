@@ -37,8 +37,8 @@ EOH
 function __hl_main__()
 {
     local -r opts=$(getopt -o :b:f:hs: -l background:,foreground:,help,style: -- "$@") || exit
-    local -A colors=([Black]=30 [Red]=31 [Green]=32 [Yellow]=33 [Blue]=34 [Purple]=35 [Cyan]=36 [White]=37)
-    local -A styles=([Normal]=0 [Bold]=1 [Faint]=2 [Italics]=3 [Underline]=4)
+    local -A colors=([black]=30 [red]=31 [green]=32 [yellow]=33 [blue]=34 [purple]=35 [cyan]=36 [white]=37)
+    local -A styles=([normal]=0 [bold]=1 [faint]=2 [italics]=3 [underline]=4)
     local hl
 
     eval set -- "$opts"
@@ -75,7 +75,7 @@ function __hl_main__()
         shift
     done
 
-    echo -e "$hl$*\e[${styles[Normal]}m"
+    echo -e "$hl$*\e[${styles[normal]}m"
 }
 
 __hl_main__ "$@"
