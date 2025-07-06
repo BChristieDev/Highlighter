@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-# @file        bin/highlighter
+# @file        bin/hl
 # @author      Brandon Christie <bchristie.dev@gmail.com>
 
 
@@ -13,11 +13,11 @@
 # Outputs:
 #   Writes help text to STDOUT
 #######################################
-function __highlighter_help__()
+function __hl_help__()
 {
     cat <<EOH
-Usage: highlighter [-b|--background <color>] [-f|--foreground <color>] [-h|--help]
-                   [-s|--style <style>]
+Usage: hl [-b|--background <color>] [-f|--foreground <color>] [-h|--help]
+          [-s|--style <style>]
 
 Options:
   -b, --background
@@ -34,31 +34,31 @@ EOH
 # Arguments:
 #   {@} Options
 #######################################
-function __highlighter_main__()
+function __hl_main__()
 {
     local -r opts=$(getopt -o :b:f:hs: -l background:,foreground:,help,style: -- "$@") || exit
     local -A colors=([Black]=30 [Red]=31 [Green]=32 [Yellow]=33 [Blue]=34 [Purple]=35 [Cyan]=36 [White]=37)
     local -A styles=([Normal]=0 [Bold]=1 [Faint]=2 [Italics]=3 [Underline]=4)
-    local highlighter
+    local hl
 
     eval set -- "$opts"
 
     while true; do
         case "$1" in
             -h|--help)
-                __highlighter_help__
+                __hl_help__
                 exit
                 ;;
             -b|--background)
-                highlighter="$highlighter\e[$((${colors[$2]}+10))m"
+                hl="$hl\e[$((${colors[$2]}+10))m"
                 shift
                 ;;
             -f|--foreground)
-                highlighter="$highlighter\e[${colors[$2]}m"
+                hl="$hl\e[${colors[$2]}m"
                 shift
                 ;;
             -s|--style)
-                highlighter="$highlighter\e[${styles[$2]}m"
+                hl="$hl\e[${styles[$2]}m"
                 shift
                 ;;
             --)
@@ -75,7 +75,7 @@ function __highlighter_main__()
         shift
     done
 
-    echo -e "$highlighter$*\e[${styles[Normal]}m"
+    echo -e "$hl$*\e[${styles[Normal]}m"
 }
 
-__highlighter_main__ "$@"
+__hl_main__ "$@"
