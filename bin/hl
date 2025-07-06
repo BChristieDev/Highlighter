@@ -52,18 +52,18 @@ function __hl_main__()
                 exit
                 ;;
             -b|--background)
-                hl="$hl\e[$((${colors[$2]}+10))m"
+                [[ -n ${colors[$2]} ]] && hl="$hl\e[$((${colors[$2]}+10))m"
                 shift
                 ;;
             -f|--foreground)
-                hl="$hl\e[${colors[$2]}m"
+                [[ -n ${colors[$2]} ]] && hl="$hl\e[${colors[$2]}m"
                 shift
                 ;;
             -p|--persist)
                 delimiter=
                 ;;
             -s|--style)
-                hl="$hl\e[${styles[$2]}m"
+                [[ -n ${styles[$2]} ]] && hl="$hl\e[${styles[$2]}m"
                 shift
                 ;;
             --)
