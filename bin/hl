@@ -17,14 +17,14 @@ function __hl_help__()
 {
     cat <<EOH
 Usage: hl [-b|--background <color>] [-f|--foreground <color>] [-h|--help]
-          [-p|--persist] [-s|--style <style>]
+          [-p|--persist] [-s|--style <style>] <args>
 
 Options:
-  -b, --background
-  -f, --foreground
-  -h, --help
-  -p, --persist
-  -s, --style
+  -b, --background   change background color
+  -f, --foreground   change foreground color
+  -h, --help         display this help and exit
+  -p, --persist      do not reset ansi codes on script completion
+  -s, --style        change style
 EOH
 }
 
